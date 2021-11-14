@@ -76,4 +76,4 @@ Il sera donc important de se démarquer de ces concurrents en se basant sur la n
 - Gestion du contenu informationnel
 - Gestion du catalogue
 
-
+.
