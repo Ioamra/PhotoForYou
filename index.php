@@ -10,7 +10,7 @@ session_start();
 	<body>
 		<?php 
 		include "includes/bdd.php";
-		include "includes/nav.php"; 
+		include "includes/nav.php";
 		?>
 		
 

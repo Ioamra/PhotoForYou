@@ -70,7 +70,7 @@ if($_SESSION['grade'] != 'photographe'){
                     </div>
                     <div class="mb-3">
                         <label for="img" class="form-label">Image</label><br/>
-                        <input class="align-center" type="file" name="img" id='imgw' required>
+                        <input class="align-center" type="file" name="img" id='img' onchange="loadFile(event)" required>
                     </div>
                     <div class="mb-3">
                         <label for="prix_image" class="form-label">Prix</label>
@@ -80,10 +80,19 @@ if($_SESSION['grade'] != 'photographe'){
                     <button type="submit" name="submit" class="btn btn-primary">Publier</button>
                 </form>
             </div>
-            <div class="col-2"></div>
-            <div class="col-4"></div>
+            <div class="col-4"><img style="height:auto; width:40em" id="output" /></div>
         </div>
 
 		<?php include "includes/footer.php"; ?>
+
+        <script>
+            var loadFile = function(event){
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function(){
+                    URL.revokeObjectURL(output.src);
+                }
+            }
+        </script>
 	</body>
 </html>

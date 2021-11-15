@@ -8,12 +8,15 @@ if (isset($_POST['submit'])){
     $prenom = $_POST['prenom'];
     $mail = $_POST['mail'];
     $grade = $_POST['grade'];
+    $pseudo = $_POST['pseudo'];
     $siret = '';
     
 
     if(strlen($nom) < 3 && strlen($nom) > 15){ $validation = False; }
 
     if(strlen($prenom) < 3 && strlen($prenom) > 15){ $validation = False; }
+
+    if(strlen($pseudo) < 3 && strlen($pseudo) > 15){ $validation = False; }
 
     if(filter_var($mail, FILTER_VALIDATE_EMAIL) == False) { $validation = False; }
 
@@ -24,6 +27,12 @@ if (isset($_POST['submit'])){
     $req->execute();
     $result = $req->rowCount();
     if($result > 0){ $validation = False; $mes_error = '<br/>Cette adresse mail est déjà utilisé.'; }
+
+    //* Vérification des doublons de pseudo
+    $req = $bdd->prepare("SELECT * FROM user WHERE pseudo = '$pseudo'");
+    $req->execute();
+    $result = $req->rowCount();
+    if($result > 0){ $validation = False; $mes_error = '<br/>Ce pseudo est déjà utilisé.'; }
 
     //* Vérification des doublons de num SIRET
     if(!empty($_POST['siret'])){ 
@@ -38,7 +47,16 @@ if (isset($_POST['submit'])){
     if($_POST['password1'] != $_POST['password2']){ $validation = False; $mes_error = '<br/>Les mots de passe ne corresponde pas.'; }
 
     if($validation == True){
-        
+
+        $chemin_image = 'upload/user/defaut.png';
+        if($_FILES['img_profil']['name'] = ''){
+            $file_name = $_FILES['img_profil']['name'];
+            $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
+            $chemin_image = "upload/user/".$pseudo.$ext_img;
+            $tmp_img = $_FILES['img_profil']['tmp_name'];
+            move_uploaded_file($tmp_img, $chemin_image);
+        }
+
         $mdp = sha1($_POST['password1']);   
         // * Si le comte est photographe il faut une validation de l'admin
         if($grade == 'photographe'){
@@ -48,10 +66,12 @@ if (isset($_POST['submit'])){
             $etat = 'valid';
         }
 
-        $req = $bdd->prepare("INSERT INTO user (nom, prenom, mail, mdp, grade, SIRET, etat) 
-                            VALUES (:nom, :prenom, :mail, :mdp, :grade, :siret, :etat)");
+        $req = $bdd->prepare("INSERT INTO user (nom, prenom, pseudo, img_profil, mail, mdp, grade, SIRET, etat) 
+                            VALUES (:nom, :prenom, :pseudo, :img_profil, :mail, :mdp, :grade, :siret, :etat)");
         $req->bindValue(':nom', $nom);
         $req->bindValue(':prenom', $prenom);
+        $req->bindValue(':pseudo', $pseudo);
+        $req->bindValue(':img_profil', $chemin_image);
         $req->bindValue(':mail', $mail);
         $req->bindValue(':mdp', $mdp);
         $req->bindValue(':grade', $grade);
@@ -63,7 +83,17 @@ if (isset($_POST['submit'])){
             session_start();
             $_SESSION['grade'] = $grade;
             $_SESSION['mail'] = $mail;
-            header("location:index.php"); 
+            $_SESSION['pseudo'] = $pseudo;
+            header("location:index.php");
+        }else{
+            //* pour remettre à 0 les input
+            $nom = '';
+            $prenom = '';
+            $mail = '';
+            $grade = '';
+            $pseudo = '';
+            $siret = '';
+            $mes_error = 'Votre compte est en attente de validation.';
         }
     }
 }

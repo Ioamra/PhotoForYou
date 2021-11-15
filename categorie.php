@@ -33,7 +33,8 @@ session_start();
 				echo '				<div class="fs-5 mb-5">';
 				echo '					<span>'.$li['prix_image'].' Credits</span>';
 				echo '				</div>';
-				echo '				<p class="lead">écrire ici les caracteristique // taille</p>';
+				//! ajouter taille // lien vers le compte du photographe ...
+				echo '				<p class="lead">écrire ici les caracteristique // taille // lien vers le compte du photographe ...</p>';
 				echo '				<div class="d-flex">';
 				echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button">Ajoutez au panier</button>';
 				echo '				</div>';

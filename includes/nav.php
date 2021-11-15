@@ -8,7 +8,7 @@
       <ul class="navbar-nav me-auto">
         <?php
       if(isset($_SESSION['grade'])){
-          echo '<li class="nav-item"><a class="nav-link" href="profil.php">Mon compte</a></li>';
+          echo '<li class="nav-item"><a class="nav-link" href="profil.php?pseudo='.$_SESSION['pseudo'].'">Mon compte</a></li>';
       }
           ?>
         <li class="nav-item"><a class="nav-link" href="categorie.php">Catégorie</a></li>

@@ -12,7 +12,6 @@ session_start();
 		include "includes/bdd.php";
 		include "includes/nav.php"; 
 		?>
-		
 
 		<?php include "includes/footer.php"; ?>
 	</body>

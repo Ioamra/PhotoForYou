@@ -39,10 +39,17 @@
                 $r_g->execute();
                 $result_r_g = $r_g->fetch(\PDO::FETCH_OBJ);
                 $grade =  $result_r_g->grade;
+
+                $req_pseudo = "SELECT pseudo FROM user WHERE mail = '$mail'";
+                $r_p = $bdd->prepare($req_pseudo);
+                $r_p->execute();
+                $result_r_p = $r_p->fetch(\PDO::FETCH_OBJ);
+                $pseudo =  $result_r_p->pseudo;
     
                 session_start();
                 $_SESSION['grade'] = $grade;
                 $_SESSION['mail'] = $mail;
+                $_SESSION['pseudo'] = $pseudo;
                 header("location:index.php");
             }
         }
