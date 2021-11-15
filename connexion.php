@@ -33,6 +33,7 @@
             if($etat == 'banni'){
                 $mess = 'Votre comte à été banni.';
             }
+        //* Si le compte est valid
             if($etat == 'valid'){
                 $req_grade = "SELECT grade FROM user WHERE mail = '$mail'";
                 $r_g = $bdd->prepare($req_grade);

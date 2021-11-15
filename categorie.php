@@ -17,6 +17,7 @@ session_start();
 	if(!empty($_GET['categorie'])){
 		if(!empty($_GET['img'])){
 	//* Page Image
+	//! besoin d'un lien pour revenir en arriere + vers compte du photographe
 			$categorie = $_GET['categorie'];
 			$id_image = $_GET['img'];
 			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = :id_image");
@@ -33,7 +34,7 @@ session_start();
 				echo '				<div class="fs-5 mb-5">';
 				echo '					<span>'.$li['prix_image'].' Credits</span>';
 				echo '				</div>';
-				//! ajouter taille // lien vers le compte du photographe ...
+				//! ajouter dimention // lien vers le compte du photographe ...
 				echo '				<p class="lead">écrire ici les caracteristique // taille // lien vers le compte du photographe ...</p>';
 				echo '				<div class="d-flex">';
 				echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button">Ajoutez au panier</button>';
@@ -50,10 +51,12 @@ session_start();
 
 		}else{
 	//* Page avec la liste des images en fonction de la catégorie
+	//! besoin d'un lien pour revenir en arriere
+	//! afficher certaine caracteristique : dimention, lien vers le photographe
 
 			$categorie = $_GET['categorie'];
 
-			$req = $bdd->prepare("SELECT * FROM Image WHERE nom_categorie = :categorie");
+			$req = $bdd->prepare("SELECT * FROM Image WHERE nom_categorie = :categorie AND acheteur IS NULL");
 			$req->bindValue(':categorie', $categorie);
 			$req->execute();
 			$data = $req->fetchAll();
@@ -101,7 +104,7 @@ session_start();
 
 				//* Image la plus rescente de la catégorie
 				$req_img = $bdd->prepare("SELECT chemin_image FROM Image WHERE nom_categorie = :nom_categorie 
-							AND id_image = (SELECT max(id_image) FROM Image WHERE nom_categorie = :nom_categorie ) ");
+							AND id_image = (SELECT max(id_image) FROM Image WHERE nom_categorie = :nom_categorie AND acheteur IS NULL ) ");
 				$req_img->bindValue(':nom_categorie', $li['nom_categorie']);
 				$req_img->execute();
 				$data_img = $req_img->fetchAll();

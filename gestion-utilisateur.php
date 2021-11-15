@@ -34,6 +34,7 @@ if($_SESSION['grade'] != 'admin'){
 						<td>Etat</td>
 					</tr>
 					<?php
+				//* Liste des utilisateur
         			    $req = $bdd->query("SELECT * FROM User WHERE grade != 'admin'");
         			    $data = $req->fetchAll();
         			    echo '';

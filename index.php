@@ -11,6 +11,7 @@ session_start();
 		<?php 
 		include "includes/bdd.php";
 		include "includes/nav.php";
+		//! ajouter les dernieres img mise en vente qui non pas encore d'acheter (a limier en nombre)
 		?>
 		
 

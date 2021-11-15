@@ -35,6 +35,7 @@
                     <div class="mb-2">
                         <label for="img_profil" class="form-label">Image (pas obligatoire)</label><br/>
                         <input class="align-center" type="file" name="img_profil" onchange="loadFile(event)">
+                        <!-- Previsualisation de l'image qui vient d'arriver -->
                         <img style="height:auto; width:10em" id="output" />
                     </div>
                     <div class="mb-2">
@@ -53,6 +54,7 @@
                         <input class="form-control" name="siret" pattern="[0-9]{14}" required>
 
                         <script type="text/javascript">
+                            //* fonction pour modifié le formulaire en fonction de l'option coché (photographe ou client)
                             function actualisation_grade(){
                                 var photographe = document.getElementById('photographe');
                                 var client = document.getElementById('client');
@@ -65,13 +67,14 @@
                                     suite_form.innerHTML = '';
                                 }
                             }
+                            //* si le grade est client et que l'inscription n'a pas fonctionné -> re-declenchement de la fonction pour avoir le bon affichage
                             <?php if(isset($_POST['grade'])){if($_POST['grade']=='client'){echo 'actualisation_grade()';}} ?>
                         </script>
                     </div>
 
                     <button type="submit" name="submit" class="btn btn-primary">S'inscrire</button>
                 </form>
-                <?php 
+                <?php
                 echo $mes_error;
                 ?>
                 <hr/>
@@ -82,6 +85,7 @@
 
         <?php include "includes/footer.php"; ?>
         <script>
+        //* script pour l'affichage automatique de l'image
             var loadFile = function(event){
                 var output = document.getElementById('output');
                 output.src = URL.createObjectURL(event.target.files[0]);

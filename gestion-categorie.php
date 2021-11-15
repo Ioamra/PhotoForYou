@@ -28,7 +28,7 @@ if($_SESSION['grade'] != 'admin'){
             $nom_categorie = $_POST['nom_categorie'];
     
             if(strlen($nom_categorie) < 3 && strlen($nom_categorie) > 20){ $validation = False; }
-            //* Vérification des doublons
+            //* Vérification des doublons de categorie
             $req = $bdd->prepare("SELECT * FROM categorie WHERE nom_categorie = '$nom_categorie'");
             $req->execute();
             $result = $req->rowCount();
@@ -63,6 +63,7 @@ if($_SESSION['grade'] != 'admin'){
                         <td class="p-2">Supprimer</td>
                     </tr>
                 <?php
+                //* Affichage des categories avec lien pour supprimer
                     $req = $bdd->query("SELECT * FROM Categorie");
                     $data = $req->fetchAll();
                     foreach ($data as $li){

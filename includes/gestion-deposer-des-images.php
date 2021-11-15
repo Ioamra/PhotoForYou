@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
     if(strlen($nom_image) < 3 && strlen($nom_image) > 20){ $validation = False; }
 
     // ! Verif que le nom n'existe pas dans la base de donnée
-    // ! Prix minimum
+    // ! Prix minimum / max
     // ! Categorie existante dans la table categorie
     // ! isset $_FILES
     // ! .ext des image == jpg...
@@ -24,6 +24,7 @@ if(isset($_POST['submit'])){
 
     if($validation == True){
 
+    //* Renommage de l'image et ajout du chemin
         $file_name = $_FILES['img']['name'];
         $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
         $chemin_image = "upload/".$categorie1."/".$nom_image.$ext_img;
@@ -32,9 +33,11 @@ if(isset($_POST['submit'])){
 
         $categorie = $categorie1;
         
+    //* Si d'autre categorie ont ete choisie -> virgule + la prochaine categorie
         if(!empty($categorie2)){ $categorie = $categorie.', '.$categorie2; }
         if(!empty($categorie3)){ $categorie = $categorie.', '.$categorie3; }
 
+    //* Ajout dans la bdd
         $req = $bdd->prepare("INSERT INTO image (nom_image, prix_image, chemin_image, nom_categorie, vendeur) VALUES (:nom_image, :prix_image, :chemin_image, :nom_categorie, :vendeur)");
         $req->bindValue(':nom_image', $nom_image);
         $req->bindValue(':prix_image', $prix_image);

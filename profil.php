@@ -23,10 +23,12 @@ if(empty($_SESSION['grade'])){
 if(!empty($_GET['pseudo'])){
   $pseudo = $_GET['pseudo'];
 
+  //* nombre d'image mis en vente par le vendeur
     $req = $bdd->prepare("SELECT * FROM image WHERE vendeur = '$pseudo'");
     $req->execute();
     $nb_image = $req->rowCount();
 
+  //* Recuperation des info de l'utilisateur en fonction du $_GET
     $req = $bdd->query("SELECT * FROM user WHERE pseudo = '$pseudo'");
     $data = $req->fetchAll();
     foreach ($data as $li){
@@ -41,6 +43,7 @@ if(!empty($_GET['pseudo'])){
 			<!-- Image de l'utilisateur -->
               <img src="<?php echo $li['img_profil']; ?>" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
               <?php
+            //* Editer le profil afficher uniquement si la SESSION correspond au GET
               if($_SESSION['pseudo'] == $pseudo){
                 echo '<button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">Editer le profil</button>';
               }
@@ -64,6 +67,7 @@ if(!empty($_GET['pseudo'])){
             <div class="mb-5">
               <p class="lead fw-normal mb-1">Mes information</p>
               <div class="p-4" style="background-color: #f8f9fa;">
+              <!-- Tableau des information de l'utilisateur -->
               <table class="table">
                 <tbody>
                   <tr>
@@ -96,7 +100,8 @@ if(!empty($_GET['pseudo'])){
             </div>
             <div class="row g-2">
             <?php
-              $req_img = $bdd->query("SELECT * FROM Image WHERE vendeur = '$pseudo'");
+            //* Liste des images de l'utilisateur qui sont encore achetable
+              $req_img = $bdd->query("SELECT * FROM Image WHERE vendeur = '$pseudo' AND acheteur IS NULL");
               $req_img->execute();
               $data_img = $req_img->fetchAll();
               echo '<section class="py-5">';

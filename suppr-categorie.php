@@ -15,11 +15,12 @@
     
             $nom_categorie = $_GET["nom_categorie"];
     
+        //* Supprime dans la bdd la categorie
             $req = $bdd->prepare("DELETE FROM categorie WHERE nom_categorie = :nom_categorie");
             $req->bindValue(':nom_categorie', $nom_categorie);
             $req->execute();            
             header("location:gestion-categorie.php");
-            //* supprime le dossier de la categorie
+        //* supprime le dossier de la categorie
             rmdir('upload/'.$nom_categorie); 
         }
     }

@@ -47,9 +47,11 @@ if (isset($_POST['submit'])){
     if($_POST['password1'] != $_POST['password2']){ $validation = False; $mes_error = '<br/>Les mots de passe ne corresponde pas.'; }
 
     if($validation == True){
-
+    //* Si il ni a pas d'image
         $chemin_image = 'upload/user/defaut.png';
+    //* Sinon
         if($_FILES['img_profil']['name'] = ''){
+        //* Renommage de l'image et ajout du chemin
             $file_name = $_FILES['img_profil']['name'];
             $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
             $chemin_image = "upload/user/".$pseudo.$ext_img;
@@ -58,14 +60,14 @@ if (isset($_POST['submit'])){
         }
 
         $mdp = sha1($_POST['password1']);   
-        // * Si le comte est photographe il faut une validation de l'admin
+        //* Si le comte est photographe il faut une validation de l'admin
         if($grade == 'photographe'){
             $etat = 'attValid';
         }
         if($grade == 'client'){
             $etat = 'valid';
         }
-
+        //* Ajout bdd
         $req = $bdd->prepare("INSERT INTO user (nom, prenom, pseudo, img_profil, mail, mdp, grade, SIRET, etat) 
                             VALUES (:nom, :prenom, :pseudo, :img_profil, :mail, :mdp, :grade, :siret, :etat)");
         $req->bindValue(':nom', $nom);

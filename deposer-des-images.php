@@ -22,6 +22,7 @@ if($_SESSION['grade'] != 'photographe'){
 		include "includes/bdd.php";
 		include "includes/nav.php";
         include "includes/gestion-deposer-des-images.php";
+        //! ajouter filigrane au image
 		?>
         <h1 class="text-center mt-4">Déposer des images</h1>
 		<div class="row justify-content-center mt-4">
@@ -38,6 +39,7 @@ if($_SESSION['grade'] != 'photographe'){
                             <?php
                                 // ! Ajoutez l'autocompletion sur les 3 catégorie, avec a la place de "categorie 1/2/3 " un input type="text"
 
+                            //* liste des categorie dans option
                                 $req = $bdd->query("SELECT * FROM Categorie");
                                 $data = $req->fetchAll();
                                 foreach ($data as $li){
@@ -48,6 +50,7 @@ if($_SESSION['grade'] != 'photographe'){
                         <select name="categorie2">
                             <option value=''>Catégorie 2</option>
                             <?php
+                            //* liste des categorie dans option
                                 $req = $bdd->query("SELECT * FROM Categorie");
                                 $data = $req->fetchAll();
                                 foreach ($data as $li){
@@ -58,6 +61,7 @@ if($_SESSION['grade'] != 'photographe'){
                         <select name="categorie3">
                             <option value=''>Catégorie 3</option>
                             <?php
+                            //* liste des categorie dans option
                                 $req = $bdd->query("SELECT * FROM Categorie");
                                 $data = $req->fetchAll();
                                 foreach ($data as $li){
@@ -80,12 +84,14 @@ if($_SESSION['grade'] != 'photographe'){
                     <button type="submit" name="submit" class="btn btn-primary">Publier</button>
                 </form>
             </div>
+            //* Previsualisation de l'image qui vient d'arriver
             <div class="col-4"><img style="height:auto; width:40em" id="output" /></div>
         </div>
 
 		<?php include "includes/footer.php"; ?>
 
         <script>
+        //* script pour l'affichage automatique de l'image
             var loadFile = function(event){
                 var output = document.getElementById('output');
                 output.src = URL.createObjectURL(event.target.files[0]);
