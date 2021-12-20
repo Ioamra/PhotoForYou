@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
     $categorie1 = $_POST['categorie1'];
     if(isset($_POST['categorie2'])){ $categorie2 = $_POST['categorie2']; }
     if(isset($_POST['categorie3'])){ $categorie3 = $_POST['categorie3']; }
-    $vendeur_photo = $_SESSION['pseudo'];
+    $vendeur_photo = $_SESSION['id'];
     
 
     if(strlen($nom_image) < 3 && strlen($nom_image) > 20){ $validation = False; }
@@ -38,12 +38,12 @@ if(isset($_POST['submit'])){
         if(!empty($categorie3)){ $categorie = $categorie.', '.$categorie3; }
 
     //* Ajout dans la bdd
-        $req = $bdd->prepare("INSERT INTO image (nom_image, prix_image, chemin_image, nom_categorie, vendeur) VALUES (:nom_image, :prix_image, :chemin_image, :nom_categorie, :vendeur)");
+        $req = $bdd->prepare("INSERT INTO image (nom_image, prix_image, chemin_image, nom_categorie, id_vendeur) VALUES (:nom_image, :prix_image, :chemin_image, :nom_categorie, :id_vendeur)");
         $req->bindValue(':nom_image', $nom_image);
         $req->bindValue(':prix_image', $prix_image);
         $req->bindValue(':chemin_image', $chemin_image);
         $req->bindValue(':nom_categorie', $categorie);
-        $req->bindValue(':vendeur', $vendeur_photo);
+        $req->bindValue(':id_vendeur', $vendeur_photo);
         $req->execute();
         
     }

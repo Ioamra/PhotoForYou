@@ -50,7 +50,7 @@ if (isset($_POST['submit'])){
     //* Si il ni a pas d'image
         $chemin_image = 'upload/user/defaut.png';
     //* Sinon
-        if($_FILES['img_profil']['name'] = ''){
+        if($_FILES['img_profil']['name'] == ''){
         //* Renommage de l'image et ajout du chemin
             $file_name = $_FILES['img_profil']['name'];
             $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));

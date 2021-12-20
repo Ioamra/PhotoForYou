@@ -21,11 +21,10 @@
         
         if($user_exist == 1){
             //* Verifiaction de l'etat du comte : attValid / valid / banni
-            $req_etat = "SELECT etat FROM user WHERE mail = '$mail'";
-            $r_e = $bdd->prepare($req_etat);
-            $r_e->execute();
-            $result_r_e = $r_e->fetch(\PDO::FETCH_OBJ);
-            $etat =  $result_r_e->etat;
+            $req = $bdd->prepare("SELECT etat FROM user WHERE mail = '$mail'");
+            $req->execute();
+            $result = $req->fetch(\PDO::FETCH_OBJ);
+            $etat =  $result->etat;
 
             if($etat == 'attValid'){
                 $mess = 'Votre comte est en cour de validation.';
@@ -35,19 +34,15 @@
             }
         //* Si le compte est valid
             if($etat == 'valid'){
-                $req_grade = "SELECT grade FROM user WHERE mail = '$mail'";
-                $r_g = $bdd->prepare($req_grade);
-                $r_g->execute();
-                $result_r_g = $r_g->fetch(\PDO::FETCH_OBJ);
-                $grade =  $result_r_g->grade;
-
-                $req_pseudo = "SELECT pseudo FROM user WHERE mail = '$mail'";
-                $r_p = $bdd->prepare($req_pseudo);
-                $r_p->execute();
-                $result_r_p = $r_p->fetch(\PDO::FETCH_OBJ);
-                $pseudo =  $result_r_p->pseudo;
+                $req = $bdd->prepare("SELECT grade, pseudo, id FROM user WHERE mail = '$mail'");
+                $req->execute();
+                $result = $req->fetch(\PDO::FETCH_OBJ);
+                $grade =  $result->grade;
+                $pseudo =  $result->pseudo;
+                $id =  $result->id;
     
                 session_start();
+                $_SESSION['id'] = $id;
                 $_SESSION['grade'] = $grade;
                 $_SESSION['mail'] = $mail;
                 $_SESSION['pseudo'] = $pseudo;
@@ -57,7 +52,7 @@
     }
 
 ?>
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center mt-4" style="width:100%;">
             <div class="col-4 text-center">
                 <form method="post">
                     <h1>Connexion</h1>
