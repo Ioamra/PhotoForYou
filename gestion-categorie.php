@@ -39,7 +39,7 @@ if($_SESSION['grade'] != 'admin'){
                 $req->bindValue(':nom_categorie', $nom_categorie);
                 $req->execute();
                 //* creer le dossier de la categorie dans upload
-                mkdir('upload/'.$nom_categorie); 
+                mkdir('upload/'.str_replace(" ", "-", $nom_categorie)); 
             }
         }
     ?>

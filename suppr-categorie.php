@@ -21,7 +21,7 @@
             $req->execute();            
             header("location:gestion-categorie.php");
         //* supprime le dossier de la categorie
-            rmdir('upload/'.$nom_categorie); 
+            rmdir('upload/'.str_replace(" ", "-", $nom_categorie)); 
         }
     }
 ?>

@@ -7,8 +7,7 @@ session_start();
 	<title>Catégorie</title>
 	<?php include "includes/head.php"; ?>
 </head>
-	<body>			<!--		BTN pour revenir a la page precedente
-		 <button class="btn btn-danger" onclick="history.go(-1)">Annuler les changement</button> -->
+	<body>
 		<?php 
 		include "includes/bdd.php";
 		include "includes/nav.php"; 
@@ -18,9 +17,10 @@ session_start();
 	if(!empty($_GET['categorie'])){
 		if(!empty($_GET['img'])){
 	//* Page Image
-	//! besoin d'un lien pour revenir en arriere + vers compte du photographe
+	//! besoin d'un lien vers compte du photographe
 			$categorie = $_GET['categorie'];
 			$id_image = $_GET['img'];
+			echo '<a href="categorie.php?categorie='.$categorie.'" class="m-3" style="text-decoration:none; color:red;">Revennir a la categorie '.$categorie.'.</a>';
 			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = :id_image");
 			$req->bindValue(':id_image', $id_image);
 			$req->execute();
@@ -61,6 +61,7 @@ session_start();
 			$req->bindValue(':categorie', $categorie);
 			$req->execute();
 			$data = $req->fetchAll();
+			echo '<a href="categorie.php" class="m-3" style="text-decoration:none; color:red;">Revennir a la liste des categories.</a>';
 			echo '<section class="py-5">';
             echo '<div class="container px-4 px-lg-5 mt-5">';
             echo '<h2 class="fw-bolder mb-4 text-center">'.$categorie.'</h2>';

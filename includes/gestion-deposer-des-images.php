@@ -1,33 +1,49 @@
 <?php
 if(isset($_POST['submit'])){
+    
+    // ! Prix minimum / max
 
     $validation = True;
 
     $nom_image = $_POST['nom_image'];
     $prix_image = $_POST['prix_image'];
     $categorie1 = $_POST['categorie1'];
-    if(isset($_POST['categorie2'])){ $categorie2 = $_POST['categorie2']; }
-    if(isset($_POST['categorie3'])){ $categorie3 = $_POST['categorie3']; }
+    
+    //* verification que la categorie existe
+    $req = $bdd->prepare("SELECT * FROM categorie WHERE nom_categorie = '$categorie1'");
+    $req->execute();
+    $result = $req->rowCount();
+    if($result == 0){ $validation = False; }
+
+    if($_POST['categorie2'] != ""){ 
+        $categorie2 = $_POST['categorie2'];
+        $req = $bdd->prepare("SELECT * FROM categorie WHERE nom_categorie = '$categorie2'");
+        $req->execute();
+        $result = $req->rowCount();
+        if($result == 0){ $validation = False; }
+    }
+    if($_POST['categorie3'] != ""){ 
+        $categorie3 = $_POST['categorie3'];
+        $req = $bdd->prepare("SELECT * FROM categorie WHERE nom_categorie = '$categorie3'");
+        $req->execute();
+        $result = $req->rowCount();
+        if($result == 0){ $validation = False; }
+    }
     $vendeur_photo = $_SESSION['id'];
     
-
     if(strlen($nom_image) < 3 && strlen($nom_image) > 20){ $validation = False; }
 
-    // ! Verif que le nom n'existe pas dans la base de donnée
-    // ! Prix minimum / max
-    // ! Categorie existante dans la table categorie
-    // ! isset $_FILES
-    // ! .ext des image == jpg...
-
-    // ! Remplacer les espace dans le titre de l'image pour le chemin
-
+    $file_name = $_FILES['img']['name'];
+    $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
+    if($ext_img != ".jpeg" && $ext_img != ".JPEG" && $ext_img != ".jpg" && $ext_img != ".JPG" && $ext_img != ".png" && $ext_img != ".PNG"){
+        $validation = False;
+        $mes_error = "Le format de l'image ne correspond pas";
+    }
 
     if($validation == True){
 
     //* Renommage de l'image et ajout du chemin
-        $file_name = $_FILES['img']['name'];
-        $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
-        $chemin_image = "upload/".$categorie1."/".$nom_image.$ext_img;
+        $chemin_image = "upload/".str_replace(" ", "-", $categorie1)."/".str_replace(" ", "-", $nom_image).$ext_img;
         $tmp_img = $_FILES['img']['tmp_name'];
         move_uploaded_file($tmp_img, $chemin_image);
 
