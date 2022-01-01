@@ -1,10 +1,4 @@
-<?php
-session_start();
-if(empty($_SESSION['grade'])){
-    header('location:index.php');
-    exit();
-}
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

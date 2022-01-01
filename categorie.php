@@ -17,7 +17,6 @@ session_start();
 	if(!empty($_GET['categorie'])){
 		if(!empty($_GET['img'])){
 	//* Page Image
-	//! besoin d'un lien vers compte du photographe
 			$categorie = $_GET['categorie'];
 			$id_image = $_GET['img'];
 			echo '<a href="categorie.php?categorie='.$categorie.'" class="m-3" style="text-decoration:none; color:red;">Revennir a la categorie '.$categorie.'.</a>';
@@ -32,13 +31,34 @@ session_start();
 				echo '			<div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="'.$li['chemin_image'].'" alt="..." /></div>';
 				echo '			<div class="col-md-6">';
 				echo '				<h1 class="display-5 fw-bolder">'.$li['nom_image'].'</h1>';
-				echo '				<div class="fs-5 mb-5">';
+				echo '				<div class="fs-5 mb-2">';
 				echo '					<span>'.$li['prix_image'].' Credits</span>';
 				echo '				</div>';
-				//! ajouter dimention // lien vers le compte du photographe ...
-				echo '				<p class="lead">écrire ici les caracteristique // taille // lien vers le compte du photographe ...</p>';
+				echo '				<div class="row">';
+				echo '					<div class="col-5 col-sm-5 col-md-4 col-lg-3">';
+				echo '						<p>Vendeur : </p>';
+				echo '						<p>Dimention : </p>';
+				echo '						<p>Catégorie : </p>';
+				echo '					</div>';
+				echo '					<div class="col">';
+				//* Recuperation du pseudo du vendeur de l'image
+				$req = $bdd->prepare("SELECT pseudo FROM user WHERE id = :id");
+				$req->bindValue(':id', $li['id_vendeur']);
+				$req->execute();
+				$data = $req->fetchAll();
+				foreach ($data as $li2){
+					echo '					<p><a data-bs-toggle="tooltip" data-bs-placement="right" title="Voir le profil du photographe."
+						style="text-decoration:none; color:black;" href="profil.php?id='.$li['id_vendeur'].'">'.$li2['pseudo'].'</a></p>';
+				}
+				$infos_image = @getImageSize($li['chemin_image']); // info sur la dimension de l'image
+				$largeur = $infos_image[0];
+				$hauteur = $infos_image[1];
+				echo '						<p>'.$largeur.' x '.$hauteur.' px</p>';
+				echo '						<p>'.$_GET['categorie'].'</p>';
+				echo '					</div>';
+				echo '				</div>';
 				echo '				<div class="d-flex">';
-				echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button">Ajoutez au panier</button>';
+				echo '					<button class="btn btn-outline-dark" type="button">Ajoutez au panier</button>';
 				echo '				</div>';
 				echo '			</div>';
 				echo '		</div>';
@@ -52,8 +72,6 @@ session_start();
 
 		}else{
 	//* Page avec la liste des images en fonction de la catégorie
-	//! besoin d'un lien pour revenir en arriere
-	//! afficher certaine caracteristique : dimention, lien vers le photographe
 
 			$categorie = $_GET['categorie'];
 
@@ -77,7 +95,20 @@ session_start();
                 echo '			<div class="card-body p-4">';
                 echo '				<div class="text-center">';
                 echo '					<h5 class="fw-bolder">'.$li['nom_image'].'</h5>';
+				//* Recuperation du pseudo du vendeur de l'image
+				$req = $bdd->prepare("SELECT pseudo FROM user WHERE id = :id");
+				$req->bindValue(':id', $li['id_vendeur']);
+				$req->execute();
+				$data = $req->fetchAll();
+				foreach ($data as $li2){
+					echo '				<a data-bs-toggle="tooltip" data-bs-placement="right" title="Voir le profil du photographe." class="btn btn-outline-dark" 
+						style="text-decoration:none; color:black;" href="profil.php?id='.$li['id_vendeur'].'">'.$li2['pseudo'].'</a><br/>';
+				}
                 echo 					$li['prix_image'].' crédits';
+				$infos_image = @getImageSize($li['chemin_image']); // info sur la dimension de l'image
+				$largeur = $infos_image[0];
+				$hauteur = $infos_image[1];
+				echo '					<p>'.$largeur.' x '.$hauteur.' px</p>';
                 echo '				</div>';
                 echo '			</div>';
                 echo '		</div>';
