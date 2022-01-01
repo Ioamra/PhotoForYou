@@ -14,6 +14,7 @@ session_start();
 		?>
 		
         <?php
+//!TODO Ajouter les alt
 	if(!empty($_GET['categorie'])){
 		if(!empty($_GET['img'])){
 	//* Page Image
@@ -28,7 +29,7 @@ session_start();
 				echo '<section class="py-5" >';
 				echo '	<div class="container px-4 px-lg-5 my-5">';
 				echo '		<div class="row gx-4 gx-lg-5 align-items-center">';
-				echo '			<div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="'.$li['chemin_image'].'" alt="..." /></div>';
+				echo '			<div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="filigramme.php?chemin_image='.$li['chemin_image'].'" alt="..." /></div>';
 				echo '			<div class="col-md-6">';
 				echo '				<h1 class="display-5 fw-bolder">'.$li['nom_image'].'</h1>';
 				echo '				<div class="fs-5 mb-2">';
