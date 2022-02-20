@@ -19,6 +19,8 @@ if($_GET['id'] != $_SESSION['id']){
 		<?php 
 		include "includes/bdd.php";
 		include "includes/nav.php";
+		include "includes/panier.php"; 
+
         $id = $_GET['id'];
         include "includes/gestion-edit-profil.php";
 //! historique achat/vente
