@@ -23,9 +23,11 @@ if($_SESSION['grade'] != 'photographe'){
 		include "includes/nav.php";
         include "includes/gestion-deposer-des-images.php";
         //! ajouter filigrane au image
+
 		?>
-        <h1 class="text-center mt-4">Déposer des images</h1>
-		<div class="row justify-content-center mt-4">
+        
+		<div class="row justify-content-center mt-4" style="width:100%;">
+            <h1 class="text-center mt-4">Déposer des images</h1>
             <div class="col-4 text-center">
                 <form method="post" enctype="multipart/form-data">
                     <div class="mb-3">
@@ -84,7 +86,7 @@ if($_SESSION['grade'] != 'photographe'){
                     <button type="submit" name="submit" class="btn btn-primary">Publier</button>
                 </form>
             </div>
-            //* Previsualisation de l'image qui vient d'arriver
+            <!-- //* Previsualisation de l'image qui vient d'arriver -->
             <div class="col-4"><img style="height:auto; width:40em" id="output" /></div>
         </div>
 
