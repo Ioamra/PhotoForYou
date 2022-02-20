@@ -11,6 +11,7 @@ session_start();
 		<?php 
 		include "includes/bdd.php";
 		include "includes/nav.php";
+		include "includes/panier.php"; 
 
 		// ! Définir l'affichage en fonction de l'utilisateur (connecter ou non)
 		// ! Tarif pour les non-connecter

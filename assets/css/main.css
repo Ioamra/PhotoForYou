@@ -1,0 +1,27 @@
+/* panier */
+.panier {
+    position: absolute;
+    margin-top: 200px;
+    right: 50px;
+    width: 0;
+}
+
+.panier-rounded {
+    border-radius: 1rem;
+}
+
+.numberCircle {
+    display: inline;
+    border-radius: 50%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: black;
+    background: rgb(255, 0, 0);
+    text-align: center;
+}
+
+.nav-panier:hover {
+    border: 1px solid white;
+}

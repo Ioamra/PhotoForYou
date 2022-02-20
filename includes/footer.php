@@ -1,6 +1,3 @@
-<!-- Bootstrap scripts -->
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.js"></script>
 <script type="text/javascript">
 
 //* Gestion navbar page active 

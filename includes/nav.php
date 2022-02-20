@@ -11,8 +11,6 @@
           echo '<li class="nav-item"><a class="nav-link" href="profil.php?id='.$_SESSION['id'].'">Mon compte</a></li>';
       }
           ?>
-        <li class="nav-item"><a class="nav-link" href="categorie.php">Catégorie</a></li>
-
 <?php
         if(isset($_SESSION['grade'])){
 //* Si l'utilisateur est admin
@@ -71,11 +69,13 @@
 ?> 
         <li class="nav-item"><a class="nav-link" href="nous-contacter.php">Nous contacter</a></li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Recherche</button>
-      </form>
       <ul class="navbar-nav">
+      <li class="nav-item d-none" id="nav-panier">
+        <a role="button" class="nav-link text-decoration-none" onclick="tooglePanier();">
+          <div id="nombre-produit" class="numberCircle"></div>
+          Pannier
+        </a>
+      </li>
 <?php
     //* deconnection || connection et inscription
         if(isset($_SESSION['grade'])){

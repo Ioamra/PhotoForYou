@@ -9,7 +9,8 @@
 		<?php 
 		include "includes/bdd.php";
 		include "includes/nav.php";
-
+		include "includes/panier.php"; 
+    
 //! historique achat/vente
 
 if(!empty($_GET['id'])){
@@ -143,10 +144,23 @@ if(!empty($_GET['id'])){
               
             </div>
           </div>
+          <div class="card-body p-4 text-black">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0">Recent photos</p>
+            </div>
+          </div> 
+        
   <?php 
-    }
+
+      $req = $bdd->prepare("SELECT nom_image, chemin_image FROM image WHERE id_acheteur= :id");
+      $req->bindParam(":id", $id);
+      $data = $req->fetchAll();
+
+
+
+    }//////////* End Profil de base //////////
     ?>
-//////////* End Profil de base //////////
+
         </div>
     </div>
   </div>
