@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 20 déc. 2021 à 22:04
+-- Généré le : Dim 20 fév. 2022 à 05:57
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -38,8 +38,10 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 --
 
 INSERT INTO `categorie` (`nom_categorie`) VALUES
-('Paysage'),
-('Portrait');
+('graffiti'),
+('paysage'),
+('peinture acrylique'),
+('portrait');
 
 -- --------------------------------------------------------
 
@@ -57,18 +59,22 @@ CREATE TABLE IF NOT EXISTS `image` (
   `id_vendeur` int(11) NOT NULL,
   `id_acheteur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_image`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `image`
 --
 
 INSERT INTO `image` (`id_image`, `nom_image`, `prix_image`, `chemin_image`, `nom_categorie`, `id_vendeur`, `id_acheteur`) VALUES
-(32, 'portrait-graffiti-2', 250, 'upload/Portrait/portrait-graffiti-2.jpg', 'Portrait', 11, NULL),
-(31, 'portrait-graffiti-1', 150, 'upload/Portrait/portrait-graffiti-1.jpg', 'Portrait', 11, NULL),
-(30, 'glacier', 300, 'upload/Paysage/glacier.jpg', 'Paysage', 11, NULL),
-(29, 'montagne', 200, 'upload/Paysage/montagne.jpg', 'Paysage', 11, NULL),
-(28, 'sainte-victoire', 400, 'upload/Paysage/sainte-victoire.jpg', 'Paysage', 11, NULL);
+(42, 'portrait street art', 150, 'upload/portrait/portrait-street-art.jpg', 'portrait', 11, NULL),
+(41, 'Libellule', 150, 'upload/peinture-acrylique/Libellule.jpg', 'peinture acrylique', 11, NULL),
+(39, 'montagne', 150, 'upload/paysage/montagne.jpg', 'paysage', 11, NULL),
+(38, 'glacier', 200, 'upload/paysage/glacier.jpg', 'paysage', 11, NULL),
+(37, 'La sainte victoire', 200, 'upload/paysage/La-sainte-victoire.jpg', 'paysage', 11, NULL),
+(43, 'portrait', 250, 'upload/portrait/portrait.jpg', 'portrait', 11, NULL),
+(44, 'turfu', 150, 'upload/peinture-acrylique/turfu.jpg', 'peinture acrylique', 11, NULL),
+(45, 'graffiti personnage', 200, 'upload/graffiti/graffiti-personnage.jpg', 'graffiti', 11, NULL),
+(46, 'graffeur du futur', 250, 'upload/graffiti/graffeur-du-futur.jpg', 'graffiti', 11, NULL);
 
 -- --------------------------------------------------------
 
