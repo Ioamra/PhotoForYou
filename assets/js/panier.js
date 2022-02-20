@@ -1,7 +1,5 @@
 $(function(){
     actuPanier();
-    console.log("$('#panier').attr('style') : ", $('#panier').attr('style').match('display: none;'));
-    // console.log($('#panier').attr('style').march('display: none'))
 });
 function tooglePanier() {
 
@@ -28,7 +26,9 @@ function actuPanier() {
         for (let i = 0; i < panier.length; i++) {
             contenu += '<div class="row rounded-3 p-2">';
             contenu += '    <div class="col-8">';
-            contenu += '        <div class="rounded-3" style="background-size: cover; width: auto; height: 10em; background-image:url('+"'"+panier[i]['url']+"'"+')"></div>';
+            contenu += '        <a href="index.php?categorie='+panier[i]['categorie']+'&img='+panier[i]['id']+'">';
+            contenu += '            <div class="rounded-3" style="background-size: cover; width: auto; height: 10em; background-image:url('+"'"+panier[i]['url']+"'"+')"></div>';
+            contenu += '        </a>';
             contenu += '    </div>';
             contenu += '    <div class="col">';
             contenu += '        <div class="">'+panier[i]['nom']+'</div>';
@@ -45,15 +45,19 @@ function actuPanier() {
         contenu += '      </li>';
         contenu += '</ul>';
         contenu += '<div class="justify-content-center">';
-        contenu += '    <button type="button" class="btn btn-secondary mb-3">';
+        contenu += '    <button type="button" class="btn btn-secondary mb-3" id="valider-achat">';
         contenu += '        Validé l\'achat';
         contenu += '    </button>';
         contenu += '</div>';
         $('#dropdown-panier').html(contenu);
+        $('#valider-achat').on('click', function(){
+            confirm('valider l\'achat');
+
+        });
     }
 }
 // Fonction pour le pannier
-// Pour l'utilisation =>    addPanier({id:12, nom:"BeauPaysage", prix:200, url:"url",});
+// Pour l'utilisation =>    addPanier({id:12, nom:"BeauPaysage", prix:200, url:"url", categorie:"nom_categorie"});
 //                          removePanier({id:12});
 
 function savePanier(panier) {
