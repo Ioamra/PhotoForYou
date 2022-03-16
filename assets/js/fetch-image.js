@@ -30,8 +30,6 @@ async function fetchSearchImage(categorie, search) {
             for (let i = 0; i < data.length; i++) {
                 var li = JSON.parse(data)[i];
                 
-                console.log(li);
-                console.log('ici',li.nom_categorie);
                 contenu += '<div class="col mb-5">';
                 contenu += '<a style="text-decoration:none; color:black;" href="index.php?categorie='+li.nom_categorie+'&img='+li.id_image+'">';
                 contenu += '<div class="card h-100">';
@@ -46,7 +44,6 @@ async function fetchSearchImage(categorie, search) {
                 contenu += '</div>';
                 contenu += '</a>';
                 contenu += '</div>';
-                console.log(contenu);
                 $('#liste-image').html(contenu);
             }
         }
@@ -75,7 +72,6 @@ async function fetchSearchCategorie(search) {
 				contenu += '		</div>';
 				contenu += '	</a>';
 				contenu += '</div>';
-                console.log(contenu);
                 $('#liste-image').html(contenu);
             }
         }
