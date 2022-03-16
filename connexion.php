@@ -48,6 +48,8 @@
                 $_SESSION['pseudo'] = $pseudo;
                 header("location:index.php");
             }
+        } else {
+            $mess = "Adresse e-mail ou mot de passe invalide.";
         }
     }
 
