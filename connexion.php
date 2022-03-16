@@ -14,8 +14,9 @@
         $mail = $_POST['mail'];
         $mdp = sha1($_POST['password']);
         
-        $req_co = "SELECT mail, mdp FROM user WHERE mail = '$mail' AND mdp = '$mdp'";
-        $co = $bdd->prepare($req_co);
+        $co = $bdd->prepare("SELECT mail, mdp FROM user WHERE mail = :mail AND mdp = :mdp");
+        $co->bindParam(':mail', $mail, PDO::PARAM_STR);
+        $co->bindParam(':mdp', $mdp, PDO::PARAM_STR);
         $co->execute();
         $user_exist = $co->rowCount();
         

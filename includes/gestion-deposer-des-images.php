@@ -5,7 +5,7 @@ if(isset($_POST['submit'])){
 
     $validation = True;
 
-    $nom_image = $_POST['nom_image'];
+    $nom_image = htmlspecialchars($_POST['nom_image']);
     $prix_image = $_POST['prix_image'];
     $categorie1 = $_POST['categorie1'];
     
@@ -55,11 +55,11 @@ if(isset($_POST['submit'])){
 
     //* Ajout dans la bdd
         $req = $bdd->prepare("INSERT INTO image (nom_image, prix_image, chemin_image, nom_categorie, id_vendeur) VALUES (:nom_image, :prix_image, :chemin_image, :nom_categorie, :id_vendeur)");
-        $req->bindValue(':nom_image', $nom_image);
-        $req->bindValue(':prix_image', $prix_image);
-        $req->bindValue(':chemin_image', $chemin_image);
-        $req->bindValue(':nom_categorie', $categorie);
-        $req->bindValue(':id_vendeur', $vendeur_photo);
+        $req->bindParam(':nom_image', $nom_image, PDO::PARAM_STR);
+        $req->bindParam(':prix_image', $prix_image, PDO::PARAM_INT);
+        $req->bindParam(':chemin_image', $chemin_image, PDO::PARAM_STR);
+        $req->bindParam(':nom_categorie', $categorie, PDO::PARAM_STR);
+        $req->bindParam(':id_vendeur', $vendeur_photo, PDO::PARAM_INT);
         $req->execute();
         
     }
