@@ -4,11 +4,11 @@ if (isset($_POST['submit'])){
 
     $validation = True;
 
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
-    $grade = $_POST['grade'];
-    $pseudo = $_POST['pseudo'];
+    $nom = htmlspecialchars($_POST['nom']);
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $mail = htmlspecialchars($_POST['mail']);
+    $grade = htmlspecialchars($_POST['grade']);
+    $pseudo = htmlspecialchars($_POST['pseudo']);
     $siret = '';
     
 
