@@ -11,13 +11,9 @@ if (isset($_POST['submit'])){
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $siret = '';
     
-
     if(strlen($nom) < 3 && strlen($nom) > 15){ $validation = False; }
-
     if(strlen($prenom) < 3 && strlen($prenom) > 15){ $validation = False; }
-
     if(strlen($pseudo) < 3 && strlen($pseudo) > 15){ $validation = False; }
-
     if(filter_var($mail, FILTER_VALIDATE_EMAIL) == False) { $validation = False; }
 
     if($grade != 'photographe' && $grade != 'client'){ $validation = False; }
