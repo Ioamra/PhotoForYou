@@ -22,7 +22,6 @@ if($_SESSION['grade'] != 'photographe'){
 		include "includes/bdd.php";
 		include "includes/nav.php";
         include "includes/gestion-deposer-des-images.php";
-        //! ajouter filigrane au image
 
 		?>
         
@@ -35,43 +34,17 @@ if($_SESSION['grade'] != 'photographe'){
                         <input type="text" class="form-control" name="nom_image" pattern="{3,20}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="categorie1" class="form-label">Catégories<br/><i>(renseignez au moins la première)</i></label><br/>
-                        <select name="categorie1">
-                            <option value=''>Catégorie 1</option>
+                        <label for="categorie1" class="form-label">Catégorie</label><br/>
+                        <select name="categorie">
+                            <option value=''>Veuillez choisir une catégorie</option>
                             <?php
-                                // ! Ajoutez l'autocompletion sur les 3 catégorie, avec a la place de "categorie 1/2/3 " un input type="text"
-
-                            //* liste des categorie dans option
+                                //* liste des categorie dans option
                                 $req = $bdd->query("SELECT * FROM Categorie");
                                 $data = $req->fetchAll();
                                 foreach ($data as $li){
                                     echo '<option>'.$li['nom_categorie'].'</option>';
                                 }
                             ?>
-                        </select>
-                        <select name="categorie2">
-                            <option value=''>Catégorie 2</option>
-                            <?php
-                            //* liste des categorie dans option
-                                $req = $bdd->query("SELECT * FROM Categorie");
-                                $data = $req->fetchAll();
-                                foreach ($data as $li){
-                                    echo '<option>'.$li['nom_categorie'].'</option>';
-                                }
-                            ?>
-                        </select>
-                        <select name="categorie3">
-                            <option value=''>Catégorie 3</option>
-                            <?php
-                            //* liste des categorie dans option
-                                $req = $bdd->query("SELECT * FROM Categorie");
-                                $data = $req->fetchAll();
-                                foreach ($data as $li){
-                                    echo '<option>'.$li['nom_categorie'].'</option>';
-                                }
-                            ?>
-                            
-
                         </select>
                     </div>
                     <div class="mb-3">

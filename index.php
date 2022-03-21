@@ -8,8 +8,7 @@ session_start();
 	<?php include "includes/head.php"; ?>
 	<script src="assets/js/fetch-image.js"></script>
 </head>
-	<body>			<!--		BTN pour revenir a la page precedente
-		 <button class="btn btn-danger" onclick="history.go(-1)">Annuler les changement</button> -->
+	<body>
 		<?php 
 		include "includes/bdd.php";
 		include "includes/nav.php"; 
@@ -28,6 +27,7 @@ session_start();
 			$req->execute();
 			$data = $req->fetchAll();
 			foreach ($data as $li){
+				echo '<button class="btn btn-danger m-2" onclick="window.location.href='."'".'index.php?categorie='.$categorie."'".'">Revenir à la liste des '.$categorie.'</button>';
 				echo '<section class="py-5" >';
 				echo '	<div class="container px-4 px-lg-5 my-5">';
 				echo '		<div class="row gx-4 gx-lg-5 align-items-center">';
@@ -57,17 +57,18 @@ session_start();
 //* Debut Liste des images
 			?>
 			<section>
-			<div class="container px-4 px-lg-5 mt-5">
-			<h2 id="categorie-titre" class="fw-bolder mb-4 text-center"></h2>
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6 form-outline mb-4">
-					<input type="text" id="search" class="form-control text-center" placeholder="Rechercher une image" />
+				<button class="btn btn-danger m-2" onclick="window.location.href='index.php'">Revenir à la liste des catégories</button>
+				<div class="container px-4 px-lg-5 mt-5">
+					<h2 id="categorie-titre" class="fw-bolder mb-4 text-center"></h2>
+					<div class="row">
+						<div class="col-3"></div>
+						<div class="col-6 form-outline mb-4">
+							<input type="text" id="search" class="form-control text-center" placeholder="Rechercher une image" />
+						</div>
+					</div>
+					<div id="liste-image" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 					</div>
 				</div>
-			<div id="liste-image" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-			</div>
-			</div>
 			</section>
 			<?php
 		}
