@@ -81,10 +81,14 @@ if(!empty($_GET['id'])){
                       <th scope="row">Mail :</th>
                       <td><?php echo $li['mail']; ?></td>
                     </tr>
-                    <tr>
-                      <th scope="row">N°siret :</th>
-                      <td><?php echo $li['SIRET']; ?></td>
-                    </tr>
+                    <?php
+                    if ($_SESSION['grade'] == 'photographe') {
+                      echo '<tr>';
+                      echo '  <th scope="row">N°siret :</th>';
+                      echo '  <td>'.$li['SIRET'].'</td>';
+                      echo '</tr>';
+                    }
+                    ?>
                     <tr>
                       <th scope="row">Credits :</th>
                       <td><?php echo $li['credits']; ?></td>

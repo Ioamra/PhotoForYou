@@ -107,10 +107,14 @@ if($_GET['id'] != $_SESSION['id']){
                     <th scope="row">Mail :</th>
                     <td><input type="text" class="form-control" name="mail" pattern="[a-z0-9._%+-éèàùç]+@[a-z0-9.-]+\.[a-z]{2,3}" value="<?php echo $li['mail']; ?>" required></td>
                   </tr>
-                  <tr>
-                    <th scope="row">N°siret : <br/>(Si vous changer votre numero de siret, <br/>votre compte sera mis en attende de validation)</th>
-                    <td><input type="text" class="form-control" name="siret" pattern="[0-9]{14}" value="<?php echo $li['SIRET']; ?>" required></td>
-                  </tr>
+                  <?php
+                  if ($_SESSION['grade'] == 'photographe') {
+                    echo '<tr>';
+                    echo '  <th scope="row">N°siret : <br/>(Si vous changer votre numero de siret, <br/>votre compte sera mis en attende de validation)</th>';
+                    echo '  <td><input type="text" class="form-control" name="siret" pattern="[0-9]{14}" value="'.$li['SIRET'].'" required></td>';
+                    echo '</tr>';
+                  }
+                  ?>
                   <tr>
                     <th scope="row">Credits :</th>
                     <td><?php echo $li['credits']; ?></td>

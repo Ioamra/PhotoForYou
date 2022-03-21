@@ -20,9 +20,11 @@ session_start();
 
 		if (isset($_POST['submit'])) {
 			$req = $bdd->prepare("SELECT credits FROM user WHERE id = :id");
-			$req->bindValue(":id", $_SESSION['id']);
-			$data = $req->fetchAll();
-			var_dump($data);
+			$req->bindValue(':id', $_SESSION['id']);
+			$req->execute();
+			$data = $req->fetch(\PDO::FETCH_OBJ);
+			$credits = $data->credits;
+			
 		}
 		?>
 		<div class="row justify-content-center mt-4" style="width:100%;">
@@ -64,7 +66,7 @@ session_start();
 							<label for="num-secu-carte" class="form-label">Code de sécurité</label>
 							<input type="int" class="form-control" name="num-secu-carte" pattern="[0-9]{3}" required>
 						</div>
-						<button type="submit" name="submit" class="btn btn-primary">Validé l'achat</button>
+						<button type="submit" name="submit" class="btn btn-primary" onclick="confirm('Etes vous sur de vouloir acheter')">Validé l'achat</button>
 					</div><br><br>
 					<img class="w-100" src="assets/img/liste-payement.jpg">
         		</form>

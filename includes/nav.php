@@ -66,16 +66,25 @@
     //* affichage de la page acheter des credit si non-connecter, la page est dans la bdd avec droit=1 (client)
           echo '<li class="nav-item"><a class="nav-link" href="acheter-des-credits.php">Tarif</a></li>';
         }
-?> 
-        <li class="nav-item"><a class="nav-link" href="nous-contacter.php">Nous contacter</a></li>
+?>
       </ul>
       <ul class="navbar-nav">
-      <li class="nav-item d-none" id="nav-panier">
-        <a role="button" class="nav-link text-decoration-none" onclick="tooglePanier();">
-          <div id="nombre-produit" class="numberCircle"></div>
-          Pannier
-        </a>
-      </li>
+        <li class="nav-item d-none" id="nav-panier">
+          <a role="button" class="nav-link text-decoration-none" onclick="tooglePanier();">
+            <div id="nombre-produit" class="numberCircle"></div>
+            Pannier
+          </a>
+        </li>
+<?php
+        if (isset($_SESSION['grade'])) {
+          $req = $bdd->prepare("SELECT credits FROM user WHERE id = :id");
+          $req->bindValue(':id', $_SESSION['id']);
+          $req->execute();
+          $data = $req->fetch(\PDO::FETCH_OBJ);
+          $credits = $data->credits;
+          echo '<li class="nav-item"><a class="nav-link" href="acheter-des-credits.php">'.$credits.' credits</a></li>';
+        }
+        ?>
 <?php
     //* deconnection || connection et inscription
         if(isset($_SESSION['grade'])){
