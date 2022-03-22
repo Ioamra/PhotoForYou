@@ -52,13 +52,9 @@
               echo '<li class="nav-item"><a class="nav-link" href='.$li['lien'].'>'.$li['acte'].'</a></li>';
             }
           }
-//* Si l'utilisateur est client
-          if($_SESSION['grade'] == 'client'){
-            $req = $bdd->query("SELECT acte, lien FROM navbar WHERE droit=1");
-            $data = $req->fetchAll();
-            foreach ($data as $li){
-              echo '<li class="nav-item"><a class="nav-link" href='.$li['lien'].'>'.$li['acte'].'</a></li>';
-            }
+
+          if($_SESSION['grade']){
+            echo '<li class="nav-item"><a class="nav-link" href="acheter-des-credits.php">Acheter des crédits</a></li>';
           }
         }
 

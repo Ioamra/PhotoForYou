@@ -122,7 +122,7 @@ if(!empty($_GET['id'])){
             foreach ($data_img as $li_img){
           
                       echo '<div class="col mb-5">';
-              echo '	<a style="text-decoration:none; color:black;" href="categorie.php?categorie='.$li_img['nom_categorie'].'&img='.$li_img['id_image'].'">';
+              echo '	<a style="text-decoration:none; color:black;" href="index.php?categorie='.$li_img['nom_categorie'].'&img='.$li_img['id_image'].'">';
                       echo '		<div class="card h-100">';
               //* image rogné width: auto; height: 15em;
               echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.$li_img['chemin_image'].')"></div>';
