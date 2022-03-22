@@ -2,7 +2,7 @@
 .panier {
     position: absolute;
     margin-top: 200px;
-    right: 50px;
+    right: 1em;
     width: 0;
 }
 
