@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 22 mars 2022 à 19:04
+-- Généré le : jeu. 31 mars 2022 à 21:31
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS `image` (
   `nom_categorie` varchar(60) NOT NULL,
   `id_vendeur` int(11) NOT NULL,
   `id_acheteur` int(11) DEFAULT NULL,
+  `date_achat` varchar(10) DEFAULT NULL,
+  `heure_achat` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id_image`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
@@ -65,18 +67,18 @@ CREATE TABLE IF NOT EXISTS `image` (
 -- Déchargement des données de la table `image`
 --
 
-INSERT INTO `image` (`id_image`, `nom_image`, `prix_image`, `chemin_image`, `nom_categorie`, `id_vendeur`, `id_acheteur`) VALUES
-(1, 'Dune', 200, 'upload/graffiti/Dune21-03-22_13-40-45.jpg', 'graffiti', 11, NULL),
-(2, 'Glacier', 150, 'upload/paysage/Glacier21-03-22_13-41-04.jpg', 'paysage', 11, NULL),
-(3, 'Graffeur du futur', 200, 'upload/graffiti/Graffeur-du-futur21-03-22_13-41-20.jpg', 'graffiti', 11, NULL),
-(4, 'Graffiti personnage', 200, 'upload/graffiti/Graffiti-personnage21-03-22_13-41-36.jpg', 'graffiti', 11, NULL),
-(5, 'Change Your Agenda', 200, 'upload/graffiti/Change-Your-Agenda21-03-22_13-42-00.jpg', 'graffiti', 11, NULL),
-(6, 'La sainte victoire', 250, 'upload/paysage/La-sainte-victoire21-03-22_13-42-15.jpg', 'paysage', 11, NULL),
-(7, 'Libellule', 400, 'upload/peinture-acrylique/Libellule21-03-22_13-42-30.jpg', 'peinture acrylique', 11, NULL),
-(8, 'Montagne', 200, 'upload/paysage/Montagne21-03-22_13-42-47.jpg', 'paysage', 11, NULL),
-(9, 'Portrait Street Art', 350, 'upload/portrait/Portrait-Street-Art21-03-22_13-43-16.jpg', 'portrait', 11, NULL),
-(10, 'Portrait Street Art', 320, 'upload/portrait/Portrait-Street-Art21-03-22_13-44-43.jpg', 'portrait', 11, NULL),
-(11, 'Turfu', 450, 'upload/peinture-acrylique/Turfu21-03-22_13-45-23.jpg', 'peinture acrylique', 11, NULL);
+INSERT INTO `image` (`id_image`, `nom_image`, `prix_image`, `chemin_image`, `nom_categorie`, `id_vendeur`, `id_acheteur`, `date_achat`, `heure_achat`) VALUES
+(1, 'Dune', 200, 'upload/graffiti/Dune21-03-22_13-40-45.jpg', 'graffiti', 11, 3, '31/03/2022', '23:24'),
+(2, 'Glacier', 150, 'upload/paysage/Glacier21-03-22_13-41-04.jpg', 'paysage', 11, NULL, NULL, NULL),
+(3, 'Graffeur du futur', 200, 'upload/graffiti/Graffeur-du-futur21-03-22_13-41-20.jpg', 'graffiti', 11, NULL, NULL, NULL),
+(4, 'Graffiti personnage', 200, 'upload/graffiti/Graffiti-personnage21-03-22_13-41-36.jpg', 'graffiti', 11, NULL, NULL, NULL),
+(5, 'Change Your Agenda', 200, 'upload/graffiti/Change-Your-Agenda21-03-22_13-42-00.jpg', 'graffiti', 11, NULL, NULL, NULL),
+(6, 'La sainte victoire', 250, 'upload/paysage/La-sainte-victoire21-03-22_13-42-15.jpg', 'paysage', 11, NULL, NULL, NULL),
+(7, 'Libellule', 400, 'upload/peinture-acrylique/Libellule21-03-22_13-42-30.jpg', 'peinture acrylique', 11, NULL, NULL, NULL),
+(8, 'Montagne', 200, 'upload/paysage/Montagne21-03-22_13-42-47.jpg', 'paysage', 11, NULL, NULL, NULL),
+(9, 'Portrait Street Art', 350, 'upload/portrait/Portrait-Street-Art21-03-22_13-43-16.jpg', 'portrait', 11, NULL, NULL, NULL),
+(10, 'Portrait Street Art', 320, 'upload/portrait/Portrait-Street-Art21-03-22_13-44-43.jpg', 'portrait', 11, NULL, NULL, NULL),
+(11, 'Turfu', 450, 'upload/peinture-acrylique/Turfu21-03-22_13-45-23.jpg', 'peinture acrylique', 11, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -129,11 +131,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `nom`, `prenom`, `pseudo`, `img_profil`, `mail`, `mdp`, `grade`, `SIRET`, `credits`, `etat`) VALUES
-(1, 'admin', 'admin', 'admin', 'upload/user/defaut.png', 'admin@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'admin', '0', 10019, 'valid'),
+(1, 'admin', 'admin', 'admin', 'upload/user/defaut.png', 'admin@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'admin', '0', 9999, 'valid'),
 (2, 'Maroud', 'Kevin', 'Lareyku', 'upload/user/defaut.png', 'photographe@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'photographe', '01234567890123', 0, 'valid'),
-(3, 'Duval', 'Jordan', 'Belorik', 'upload/user/defaut.png', 'client@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'client', '0', 0, 'valid'),
+(3, 'Duval', 'Jordan', 'Belorik', 'upload/user/defaut.png', 'client@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'client', '0', 4800, 'valid'),
 (5, 'Majou', 'Marie', 'Deyrha', 'upload/user/defaut.png', 'test@test.te', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'photographe', '01234567891234', 0, 'banni'),
-(11, 'Kazey', 'Jean', 'Kahrean', 'upload/user/defaut.png', 'test@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'photographe', '12365478963222', 0, 'valid');
+(11, 'Kazey', 'Jean', 'Kahrean', 'upload/user/defaut.png', 'test@gmail.com', '9cf95dacd226dcf43da376cdb6cbba7035218921', 'photographe', '12365478963222', 200, 'valid');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

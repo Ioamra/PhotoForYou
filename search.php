@@ -12,7 +12,7 @@ function getImages() {
     include "includes/bdd.php";
     $categorie = $_GET['categorie'];
     $search = $_GET['search'];
-    $req = $bdd->prepare("SELECT * FROM Image WHERE nom_categorie = :categorie AND nom_image LIKE '%$search%'");
+    $req = $bdd->prepare("SELECT * FROM Image WHERE nom_categorie = :categorie AND nom_image LIKE '%$search%' AND id_acheteur IS NULL");
     $req->bindValue(':categorie', $categorie);
     $req->execute();
     $data = $req->fetchAll();

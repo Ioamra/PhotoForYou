@@ -25,3 +25,9 @@
 .nav-panier:hover {
     border: 1px solid white;
 }
+
+.btn-reduire-panier {
+    position:absolute;
+    right:10px;
+    top:10px;
+}

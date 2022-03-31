@@ -19,7 +19,6 @@ session_start();
 	if(!empty($_GET['categorie'])){
 		if(!empty($_GET['img'])){
 //* Debut Image
-	//! besoin d'un lien pour revenir en arriere + vers compte du photographe
 			$categorie = $_GET['categorie'];
 			$id_image = $_GET['img'];
 			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = '$id_image'");

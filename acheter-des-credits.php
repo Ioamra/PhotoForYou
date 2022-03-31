@@ -56,7 +56,7 @@ session_start();
 				<br><br><br><br>
 				<div class="row">
 					<div class="col">
-						<input type="text" id="input-switch-money-1" name="input-switch-money-1" required><span id="span-switch-money-1">EUR</span>
+						<input type="text" id="input-switch-money-1" name="input-switch-money-1"><span id="span-switch-money-1">EUR</span>
 					</div>
 					<div class="col">
 						<a id="btn-switch-money" class="btn btn-outline-secondary">
@@ -85,7 +85,7 @@ session_start();
 	
 					<div class="row">
 						<div class="col">
-							<input type="text" id="input-switch-money-1" name="input-switch-money-1" required><span id="span-switch-money-1">EUR</span>
+							<input type="text" id="input-switch-money-1" name="input-switch-money-1"><span id="span-switch-money-1">EUR</span>
 						</div>
 						<div class="col">
 							<a id="btn-switch-money" class="btn btn-outline-secondary">
@@ -103,19 +103,19 @@ session_start();
 					<div id="form-achat">
 						<div class="mb-3">
 							<label for="nom-carte" class="form-label">Nom du détenteur de la carte</label>
-							<input type="text" class="form-control" name="nom-carte" required>
+							<input type="text" class="form-control" name="nom-carte">
 						</div>
 						<div class="mb-3">
 							<label for="num-carte" class="form-label">Numéros de la carte</label>
-							<input type="int" class="form-control" name="num-carte" required>
+							<input type="int" class="form-control" name="num-carte">
 						</div>
 						<div class="mb-3">
 							<label for="date-carte" class="form-label">Date d'expiration</label>
-							<input type="text" class="form-control" name="date-carte" required>
+							<input type="text" class="form-control" name="date-carte">
 						</div>
 						<div class="mb-3">
 							<label for="num-secu-carte" class="form-label">Code de sécurité</label>
-							<input type="int" class="form-control" name="num-secu-carte" required>
+							<input type="int" class="form-control" name="num-secu-carte">
 						</div>
 					</div>
 					<button type="submit" name="submit" class="btn btn-primary" onclick="confirm('Etes vous sur de vouloir valider.')">Validé l'achat</button>
