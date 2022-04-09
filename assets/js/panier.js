@@ -71,6 +71,7 @@ function actuPanier() {
                                 removePanier({id:+panier[i]['id']});
                             }
                             actuPanier();
+                            location.href = "historique.php";
                         }
                     });
             }

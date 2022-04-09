@@ -9,23 +9,32 @@
         <?php
       if(isset($_SESSION['grade'])){
           echo '<li class="nav-item"><a class="nav-link" href="profil.php?id='.$_SESSION['id'].'">Mon compte</a></li>';
+          if ($_SESSION['grade'] == 'client') {
+            echo '<li class="nav-item"><a class="nav-link" href="historique.php?page=1">Mes achats</a></li>';
+          }
+          if ($_SESSION['grade'] == 'photographe') {
+              echo '<li class="nav-item"><a class="nav-link" href="historique.php?page=1">Mes ventes</a></li>';
+          }
+          if ($_SESSION['grade'] == 'admin') {
+              echo '<li class="nav-item"><a class="nav-link" href="historique.php?page=1">Historique Achat/Vente</a></li>';
+          }
       }
           ?>
 <?php
         if(isset($_SESSION['grade'])){
 //* Si l'utilisateur est admin
           if($_SESSION['grade'] == 'admin'){
-    //* Dropdown client
-            $req = $bdd->query("SELECT acte, lien FROM navbar WHERE droit=1");
-            $data = $req->fetchAll();
-            echo '<li class="nav-item dropdown">';
-              echo '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Client</a>';
-              echo '<ul class="dropdown-menu" aria-labelledby="navbarDropdown">';
-                foreach ($data as $li){
-                  echo '<li><a class="dropdown-item" href='.$li['lien'].'>'.$li['acte'].'</a></li>';
-                }
-              echo '</ul>';
-            echo '</li>';
+    //* Dropdown client (Vide)
+            // $req = $bdd->query("SELECT acte, lien FROM navbar WHERE droit=1");
+            // $data = $req->fetchAll();
+            // echo '<li class="nav-item dropdown">';
+            //   echo '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Client</a>';
+            //   echo '<ul class="dropdown-menu" aria-labelledby="navbarDropdown">';
+            //     foreach ($data as $li){
+            //       echo '<li><a class="dropdown-item" href='.$li['lien'].'>'.$li['acte'].'</a></li>';
+            //     }
+            //   echo '</ul>';
+            // echo '</li>';
     //* Dropdown photographe
             $req = $bdd->query("SELECT acte, lien FROM navbar WHERE droit=2");
             $data = $req->fetchAll();

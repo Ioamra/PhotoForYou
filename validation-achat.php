@@ -16,9 +16,10 @@ if ($credits < $_GET['prixTotal']) {
     echo("Vous n\'avez pas assez de crédits.");
     return;
 }
+date_default_timezone_set("Europe/Paris");
 $tabIdImage = explode(',',$_GET['idImages']);
-$date = date('d/m/Y');
-$heure = date('H')+2;
+$date = date('Y-m-d');
+$heure = date('H');
 $heure .= date(':i');
 foreach ($tabIdImage as $id) {
     $req = $bdd->prepare('UPDATE image SET id_acheteur = :id_acheteur, date_achat = :date_achat, heure_achat = :heure WHERE id_image = :id_image');

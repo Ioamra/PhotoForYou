@@ -66,7 +66,7 @@ session_start();
 			?>
 			<section>
 				<button class="btn btn-danger m-2" onclick="window.location.href='index.php'">Revenir à la liste des catégories</button>
-				<div class="container px-4 px-lg-5 mt-5">
+				<div class="container px-4 px-lg-5">
 					<h2 id="categorie-titre" class="fw-bolder mb-4 text-center"></h2>
 					<div class="row">
 						<div class="col-3"></div>
