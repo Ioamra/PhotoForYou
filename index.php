@@ -19,38 +19,46 @@ session_start();
 	if(!empty($_GET['categorie'])){
 		if(!empty($_GET['img'])){
 //* Debut Image
-	//! besoin d'un lien pour revenir en arriere + vers compte du photographe
 			$categorie = $_GET['categorie'];
 			$id_image = $_GET['img'];
-			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = :id_image");
-			$req->bindValue(':id_image', $id_image);
+			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = '$id_image'");
 			$req->execute();
-			$data = $req->fetchAll();
-			foreach ($data as $li){
-				echo '<button class="btn btn-danger m-2" onclick="window.location.href='."'".'index.php?categorie='.$categorie."'".'">Revenir à la liste des '.$categorie.'</button>';
-				echo '<section class="py-5" >';
-				echo '	<div class="container px-4 px-lg-5 my-5">';
-				echo '		<div class="row gx-4 gx-lg-5 align-items-center">';
-				echo '			<div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="'.$li['chemin_image'].'" alt="..." /></div>';
-				echo '			<div class="col-md-6">';
-				echo '				<h1 class="display-5 fw-bolder">'.$li['nom_image'].'</h1>';
-				echo '				<div class="fs-5 mb-5">';
-				echo '					<span>'.$li['prix_image'].' Credits</span>';
-				echo '				</div>';
-				//! ajouter dimention // lien vers le compte du photographe ...
-				echo '				<p class="lead">écrire ici les caracteristique // taille // lien vers le compte du photographe ...</p>';
-				echo '				<div class="d-flex">';
-				echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button"';
-				echo '						onclick="addPanier({id:'.$li['id_image'].', nom:'."'".$li['nom_image']."'".', prix:'.$li['prix_image'].', url:'."'".$li['chemin_image']."'".', nom_categorie:'."'".$li['nom_categorie']."'".'});actuPanier();">Ajoutez au panier</button>';
-				echo '				</div>';
-				echo '			</div>';
-				echo '		</div>';
-				echo '	</div>';
-				echo '</section>';
-			}
+			$data = $req->fetch(\PDO::FETCH_OBJ);
+			$cheminIMG = $data->chemin_image;
+			$nomIMG = $data->nom_image;
+			$prixIMG = $data->prix_image;
+			$idIMG = $data->id_image;
+			$idVendeur = $data->id_vendeur;
 
+			$req = $bdd->prepare("SELECT pseudo FROM user WHERE id = $idVendeur");
+			$req->execute();
+			$data = $req->fetch(\PDO::FETCH_OBJ);
+			$pseudoPhotographe = $data->pseudo;
 
+			$infos_image = @getImageSize($cheminIMG);
+			$largeur = $infos_image[0];
+			$hauteur = $infos_image[1];
 
+			echo '<button class="btn btn-danger m-2" onclick="window.location.href='."'".'index.php?categorie='.$categorie."'".'">Revenir à la liste des '.$categorie.'</button>';
+			echo '<section>';
+			echo '	<div class="container px-4 px-lg-5 my-3">';
+			echo '		<div class="row gx-4 gx-lg-5 align-items-center">';
+			echo '			<div class="col-md-6"><a href="'.$cheminIMG.'" target="_blank"><img class="card-img-top mb-5 mb-md-0" src="'.$cheminIMG.'" alt="..." /></a></div>';
+			echo '			<div class="col-md-6">';
+			echo '				<h1 class="display-5 fw-bolder">'.$nomIMG.'</h1>';
+			echo '				<div class="fs-5 mb-5">';
+			echo '					<span>'.$largeur.' px X '.$hauteur.' px</span><br>';
+			echo '					<span>'.$prixIMG.' Credits</span>';
+			echo '				</div>';
+			echo '				<a class="btn" href="profil.php?id='.$idVendeur.'">de '.$pseudoPhotographe.'</a><br>';
+			echo '				<div class="d-flex">';
+			echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button"';
+			echo '						onclick="addPanier({id:'.$idIMG.', nom:'."'".$nomIMG."'".', prix:'.$prixIMG.', url:'."'".$cheminIMG."'".', nom_categorie:'."'".$categorie."'".'});actuPanier();">Ajoutez au panier</button>';
+			echo '				</div>';
+			echo '			</div>';
+			echo '		</div>';
+			echo '	</div>';
+			echo '</section>';
 
 //* Fin Image
 		}else{
@@ -58,7 +66,7 @@ session_start();
 			?>
 			<section>
 				<button class="btn btn-danger m-2" onclick="window.location.href='index.php'">Revenir à la liste des catégories</button>
-				<div class="container px-4 px-lg-5 mt-5">
+				<div class="container px-4 px-lg-5">
 					<h2 id="categorie-titre" class="fw-bolder mb-4 text-center"></h2>
 					<div class="row">
 						<div class="col-3"></div>

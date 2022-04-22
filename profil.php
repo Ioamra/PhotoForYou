@@ -39,10 +39,12 @@ if(!empty($_GET['id'])){
               </div>
               <?php
             //* Editer le profil afficher uniquement si la SESSION correspond au GET
+            if (isset($_SESSION['id'])) {
               if ($_SESSION['id'] == $id){
-                echo '<a href="edit-profil.php?id='.$id.'" class="d-flex flex-column btn btn-outline-dark" style="z-index: 1;">Editer le profil</a>';
+                echo '<a href="edit-profil.php?id='.$id.'" class="btn btn-outline-dark" style="z-index: 1;">Editer le profil</a>';
               }
-              ?>
+            }
+            ?>
             </div>
             <div class="ms-3" style="margin-top: 160px;">
 			        <!-- Pseudo de l'utilisateur -->
@@ -82,11 +84,13 @@ if(!empty($_GET['id'])){
                       <td><?php echo $li['mail']; ?></td>
                     </tr>
                     <?php
-                    if ($_SESSION['grade'] == 'photographe') {
-                      echo '<tr>';
-                      echo '  <th scope="row">N°siret :</th>';
-                      echo '  <td>'.$li['SIRET'].'</td>';
-                      echo '</tr>';
+                    if (isset($_SESSION['grade'])) {
+                      if ($_SESSION['grade'] == 'photographe') {
+                        echo '<tr>';
+                        echo '  <th scope="row">N°siret :</th>';
+                        echo '  <td>'.$li['SIRET'].'</td>';
+                        echo '</tr>';
+                      }
                     }
                     ?>
                     <tr>
@@ -122,7 +126,7 @@ if(!empty($_GET['id'])){
             foreach ($data_img as $li_img){
           
                       echo '<div class="col mb-5">';
-              echo '	<a style="text-decoration:none; color:black;" href="categorie.php?categorie='.$li_img['nom_categorie'].'&img='.$li_img['id_image'].'">';
+              echo '	<a style="text-decoration:none; color:black;" href="index.php?categorie='.$li_img['nom_categorie'].'&img='.$li_img['id_image'].'">';
                       echo '		<div class="card h-100">';
               //* image rogné width: auto; height: 15em;
               echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.$li_img['chemin_image'].')"></div>';
@@ -169,7 +173,7 @@ if(!empty($_GET['id'])){
               echo '<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">';
               foreach ($data_img as $li_img){
                         echo '<div class="col mb-5">';
-                echo '	<a style="text-decoration:none; color:black;" href="categorie.php?categorie='.$li_img['nom_categorie'].'&img='.$li_img['id_image'].'">';
+                echo '	<a style="text-decoration:none; color:black;" target="_blank" href="'.$li_img['chemin_image'].'">';
                         echo '		<div class="card h-100">';
                 //* image rogné width: auto; height: 15em;
                 echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.$li_img['chemin_image'].')"></div>';

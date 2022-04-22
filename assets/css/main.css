@@ -1,8 +1,20 @@
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(170, 170, 170);
+}
+
+.hover-color-histo-link:hover {
+    color: rgb(214, 214, 214) !important;
+}
+
 /* panier */
 .panier {
     position: absolute;
     margin-top: 200px;
-    right: 50px;
+    right: 1em;
     width: 0;
 }
 
@@ -24,4 +36,10 @@
 
 .nav-panier:hover {
     border: 1px solid white;
+}
+
+.btn-reduire-panier {
+    position:absolute;
+    right:10px;
+    top:10px;
 }
