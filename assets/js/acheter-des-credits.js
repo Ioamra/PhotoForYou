@@ -54,5 +54,5 @@ $(function(){
             $('#input-switch-money-2').val(val);
         }
             
-    })
+    });
 });
