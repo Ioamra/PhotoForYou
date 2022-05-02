@@ -10,5 +10,4 @@
 <!-- jquery -->
 <script src="assets/js/jquery.js"></script>
 <!-- script perso -->
-<script src="assets/js/main.js"></script>
 <script src="assets/js/panier.js"></script>
