@@ -29,12 +29,11 @@ async function fetchSearchImage(categorie, search) {
             let contenu ="";
             for (let i = 0; i < data.length; i++) {
                 var li = JSON.parse(data)[i];
-                
                 contenu += '<div class="col mb-5">';
                 contenu += '<a style="text-decoration:none; color:black;" href="index.php?categorie='+li.nom_categorie+'&img='+li.id_image+'">';
                 contenu += '<div class="card h-100">';
                 //* image rogné width: auto; height: 15em;
-                contenu += '<div style="background-size: cover; width: auto; height: 15em; background-image:url('+li.chemin_image+')"></div>';
+                contenu += '<div style="background-size: cover; width: auto; height: 15em; background-image:url('+(li.chemin_image).replace(/'/g,"\\'")+')"></div>';
                 contenu += '<div class="card-body p-4">';
                 contenu += '<div class="text-center">';
                 contenu += '<h5 class="fw-bolder">'+li.nom_image+'</h5>';
@@ -62,7 +61,7 @@ async function fetchSearchCategorie(search) {
                 contenu += '<div class="col mb-5">';
 				contenu += '	<a style="text-decoration:none; color:black;" href="index.php?categorie='+nomCategorie+'">';
 				contenu += '		<div class="card h-100">';
-				contenu += '		<div style="background-size: cover; width: auto; height: 15em; background-image:url('+cheminImage+')"></div>';
+				contenu += '		<div style="background-size: cover; width: auto; height: 15em; background-image:url('+cheminImage.replace(/'/g,"\\'")+')"></div>';
 				
 				contenu += '			<div class="card-body p-4">';
 				contenu += '				<div class="text-center">';

@@ -129,7 +129,7 @@ if(!empty($_GET['id'])){
               echo '	<a style="text-decoration:none; color:black;" href="index.php?categorie='.$li_img['nom_categorie'].'&img='.$li_img['id_image'].'">';
                       echo '		<div class="card h-100">';
               //* image rogné width: auto; height: 15em;
-              echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.$li_img['chemin_image'].')"></div>';
+              echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.str_replace("'", "\'", $li_img['chemin_image']).')"></div>';
                       echo '			<div class="card-body p-4">';
                       echo '				<div class="text-center">';
                       echo '					<h5 class="fw-bolder">'.$li_img['nom_image'].'</h5>';
@@ -176,7 +176,7 @@ if(!empty($_GET['id'])){
                 echo '	<a style="text-decoration:none; color:black;" target="_blank" href="'.$li_img['chemin_image'].'">';
                         echo '		<div class="card h-100">';
                 //* image rogné width: auto; height: 15em;
-                echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.$li_img['chemin_image'].')"></div>';
+                echo '			<div style="background-size: cover; width: auto; height: 15em; background-image:url('.str_replace("'", "\'", $li_img['chemin_image']).')"></div>';
                         echo '			<div class="card-body p-4">';
                         echo '				<div class="text-center">';
                         echo '					<h5 class="fw-bolder">'.$li_img['nom_image'].'</h5>';
