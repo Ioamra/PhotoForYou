@@ -21,7 +21,7 @@ session_start();
 //* Debut Image
 			$categorie = $_GET['categorie'];
 			$id_image = $_GET['img'];
-			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = '$id_image'");
+			$req = $bdd->prepare("SELECT * FROM Image WHERE id_image = $id_image");
 			$req->execute();
 			$data = $req->fetch(\PDO::FETCH_OBJ);
 			$cheminIMG = $data->chemin_image;
@@ -29,6 +29,9 @@ session_start();
 			$prixIMG = $data->prix_image;
 			$idIMG = $data->id_image;
 			$idVendeur = $data->id_vendeur;
+			if ($data->id_acheteur != NULL) {
+				header('location:index.php');
+			}
 
 			$req = $bdd->prepare("SELECT pseudo FROM user WHERE id = $idVendeur");
 			$req->execute();
