@@ -52,11 +52,12 @@ if($_SESSION['grade'] != 'photographe'){
                         <input class="align-center" type="file" name="img" id='img' onchange="loadFile(event)" required>
                     </div>
                     <div class="mb-3">
-                        <label for="prix_image" class="form-label">Prix</label>
+                        <label for="prix_image" class="form-label">Prix (entre 250 et 25 000 crédits)</label>
                         <input class="form-control" name="prix_image" pattern="[0-9]{1,11}" required>
                     </div>
                     
                     <button type="submit" name="submit" class="btn btn-primary">Publier</button>
+                    <?=@$mes_error ?>
                 </form>
             </div>
             <!-- //* Previsualisation de l'image qui vient d'arriver -->

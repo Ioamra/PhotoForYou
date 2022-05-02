@@ -1,7 +1,5 @@
 <?php
 if(isset($_POST['submit'])){
-    
-    // ! Prix minimum / max
 
     $validation = True;
 
@@ -17,6 +15,11 @@ if(isset($_POST['submit'])){
 
     $vendeur_photo = $_SESSION['id'];
     
+    if ($prix_image < 250 || $prix_image > 25000 ) {
+        $validation = false;
+        $mes_error = "<br>Le prix doit être entre 250 crédits et 25 000 crédits";
+    }
+
     if(strlen($nom_image) < 3 && strlen($nom_image) > 20){ $validation = False; }
 
     if ($_FILES['img']['size'] > 2000000) {
@@ -27,11 +30,9 @@ if(isset($_POST['submit'])){
     $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
     if($ext_img != ".jpeg" && $ext_img != ".JPEG" && $ext_img != ".jpg" && $ext_img != ".JPG" && $ext_img != ".png" && $ext_img != ".PNG"){
         $validation = False;
-        $mes_error = "Le format de l'image ne correspond pas";
+        $mes_error = "<br>Le format de l'image ne correspond pas";
     }
-
     if($validation == True){
-
     //* Renommage de l'image et ajout du chemin
         $chemin_image = "upload/".str_replace(" ", "-", $categorie)."/".str_replace(" ", "-", $nom_image).date("d-m-y_H-i-s").$ext_img;
         $tmp_img = $_FILES['img']['tmp_name'];
