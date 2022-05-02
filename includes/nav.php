@@ -77,7 +77,7 @@
         <li class="nav-item d-none" id="nav-panier">
           <a role="button" class="nav-link text-decoration-none" onclick="tooglePanier();">
             <div id="nombre-produit" class="numberCircle"></div>
-            Pannier
+            Panier
           </a>
         </li>
 <?php
