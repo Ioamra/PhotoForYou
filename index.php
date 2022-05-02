@@ -54,10 +54,12 @@ session_start();
 			echo '					<span>'.$prixIMG.' Credits</span>';
 			echo '				</div>';
 			echo '				<a class="btn" href="profil.php?id='.$idVendeur.'">de '.$pseudoPhotographe.'</a><br>';
-			echo '				<div class="d-flex">';
-			echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button"';
-			echo '						onclick="addPanier({id:'.$idIMG.', nom:'."'".$nomIMG."'".', prix:'.$prixIMG.', url:'."'".$cheminIMG."'".', nom_categorie:'."'".$categorie."'".'});actuPanier();">Ajoutez au panier</button>';
-			echo '				</div>';
+			if ($_SESSION['grade'] == 'client') {
+				echo '				<div class="d-flex">';
+				echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button"';
+				echo '						onclick="addPanier({id:'.$idIMG.', nom:'."'".$nomIMG."'".', prix:'.$prixIMG.', url:'."'".$cheminIMG."'".', nom_categorie:'."'".$categorie."'".'});actuPanier();">Ajoutez au panier</button>';
+				echo '				</div>';
+			}
 			echo '			</div>';
 			echo '		</div>';
 			echo '	</div>';
