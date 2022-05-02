@@ -14,6 +14,17 @@ function tooglePanier() {
     }
 }
 
+// Lancé uniquement via le btn #btn-ajouter-au-panier
+function ajouterAuPanier() {
+    let id = $('#btn-ajouter-au-panier').attr('data-id');
+    let nom = $('#btn-ajouter-au-panier').attr('data-nom');
+    let prix = parseInt($('#btn-ajouter-au-panier').attr('data-prix'));
+    let url = $('#btn-ajouter-au-panier').attr('data-url');
+    let categorie = $('#btn-ajouter-au-panier').attr('data-categorie');
+    addPanier({id:id, nom:nom, prix:prix, url:url, categorie:categorie});		
+    actuPanier();
+}
+
 function actuPanier() {
     if (getNombreProduit() == 0) {
         $('#nav-panier').addClass('d-none');
@@ -32,7 +43,7 @@ function actuPanier() {
             contenu += '<div class="row rounded-3 p-2">';
             contenu += '    <div class="col-8">';
             contenu += '        <a href="'+panier[i]['url']+'" target="_blank">';
-            contenu += '            <div class="rounded-3" style="background-size: cover; width: auto; height: 10em; background-image:url('+"'"+panier[i]['url']+"'"+')"></div>';
+            contenu += '            <div class="rounded-3" style="background-size: cover; width: auto; height: 10em; background-image:url('+"'"+panier[i]['url'].replace(/'/g,"\\'")+"'"+')"></div>';
             contenu += '        </a>';
             contenu += '    </div>';
             contenu += '    <div class="col"><br>';
@@ -78,6 +89,7 @@ function actuPanier() {
         });
     }
 }
+
 // Fonction pour le pannier
 // Pour l'utilisation =>    addPanier({id:12, nom:"BeauPaysage", prix:200, url:"url", categorie:"nom_categorie"});
 //                          removePanier({id:12});

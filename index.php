@@ -57,8 +57,8 @@ session_start();
 			if (isset($_SESSION['grade'])) {
 				if ($_SESSION['grade'] == 'client') {
 					echo '				<div class="d-flex">';
-					echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button"';
-					echo '						onclick="addPanier({id:'.$idIMG.', nom:'."'".$nomIMG."'".', prix:'.$prixIMG.', url:'."'".$cheminIMG."'".', nom_categorie:'."'".$categorie."'".'});actuPanier();">Ajoutez au panier</button>';
+					echo '					<button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="ajouterAuPanier();" id="btn-ajouter-au-panier"';
+					echo '						data-id="'.$idIMG.'" data-nom="'.$nomIMG.'" data-prix="'.$prixIMG.'" data-url="'.$cheminIMG.'" data-categorie="'.$categorie.'">Ajoutez au panier</button>';
 					echo '				</div>';
 				}
 			}
@@ -66,7 +66,8 @@ session_start();
 			echo '		</div>';
 			echo '	</div>';
 			echo '</section>';
-
+			?>
+<?php
 //* Fin Image
 		}else{
 //* Debut Liste des images
