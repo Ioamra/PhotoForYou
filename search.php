@@ -2,16 +2,14 @@
 include "includes/bdd.php";
 if ($_GET['search']) {
     if (!empty($_GET['categorie'])) {
-        getImages();
+        getImages($_GET['categorie'], $_GET['search']);
     } else {
-        getCategorie();
+        getCategorie($_GET['search']);
     }
 }
 
-function getImages() {
+function getImages($categorie, $search) {
     include "includes/bdd.php";
-    $categorie = $_GET['categorie'];
-    $search = $_GET['search'];
     $req = $bdd->prepare("SELECT * FROM Image WHERE nom_categorie = :categorie AND nom_image LIKE '%$search%' AND id_acheteur IS NULL");
     $req->bindValue(':categorie', $categorie);
     $req->execute();
@@ -20,9 +18,8 @@ function getImages() {
     return json_encode($data);
 }
 
-function getCategorie() {
+function getCategorie($search) {
     include "includes/bdd.php";
-    $search = $_GET['search'];
     $req = $bdd->prepare("SELECT * FROM Categorie WHERE nom_categorie LIKE '%$search%'");
     $req->execute();
     $data = $req->fetchAll();
