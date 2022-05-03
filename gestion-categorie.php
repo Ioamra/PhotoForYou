@@ -44,7 +44,7 @@ if($_SESSION['grade'] != 'admin'){
         }
     ?>
         <h1 class="text-center mt-4">Gestion Catégorie</h1>
-		<div class="row justify-content-center mt-4">
+		<div class="row justify-content-center mt-4 w-100">
             <div class="col-4 text-center">
         <!-- formulaire d'ajout de catégorie -->
                 <form method="post">

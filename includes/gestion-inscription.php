@@ -46,7 +46,7 @@ if (isset($_POST['submit'])){
     //* Si il ni a pas d'image
         $chemin_image = 'upload/user/defaut.png';
     //* Sinon
-        if($_FILES['img_profil']['name'] == ''){
+        if(!empty($_FILES['img_profil'])){
         //* Renommage de l'image et ajout du chemin
             $file_name = $_FILES['img_profil']['name'];
             $ext_img = ".".strtolower(substr(strrchr($file_name, "."), 1));
@@ -78,7 +78,10 @@ if (isset($_POST['submit'])){
         $req->execute();
 
         if($etat == 'valid'){
+            $req = $bdd->query("SELECT id FROM user WHERE mail = $mail");
+            $data = $req->fetch(PDO::FETCH_ASSOC);
             session_start();
+            $_SESSION['id'] = $data['id'];
             $_SESSION['grade'] = $grade;
             $_SESSION['mail'] = $mail;
             $_SESSION['pseudo'] = $pseudo;
