@@ -21,7 +21,7 @@ if($_SESSION['grade'] != 'admin'){
 		include "includes/nav.php"; 
 		?>
 		<h1 class="text-center mt-4">Gestion Utilisateur</h1>
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center mt-4" style="width:100%;">
             <div class="col-6 text-center">
 				<table class="table table-bordered table-striped">
 					<tr>
